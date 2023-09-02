@@ -14,6 +14,15 @@ defmodule OuterAppWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :inner_app do
+    plug OuterAppWeb.ExamplePlug
+  end
+
+  scope "/" do
+    pipe_through :inner_app
+    forward "/inner_app", InnerAppWeb.Router
+  end
+
   scope "/", OuterAppWeb do
     pipe_through :browser
 

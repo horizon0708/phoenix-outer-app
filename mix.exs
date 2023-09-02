@@ -49,7 +49,8 @@ defmodule OuterApp.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:inner_app, git: "https://github.com/horizon0708/phoenix-inner-app.git"}
     ]
   end
 

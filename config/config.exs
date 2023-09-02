@@ -10,6 +10,20 @@ import Config
 config :outer_app,
   ecto_repos: [OuterApp.Repo]
 
+# this config.exs overrides the config.exs in the inner_app
+config :inner_app, InnerAppWeb.Endpoint,
+  url: [host: "localhost"],
+  render_errors: [
+    formats: [html: InnerAppWeb.ErrorHTML, json: InnerAppWeb.ErrorJSON],
+    layout: false
+  ],
+  pubsub_server: InnerApp.PubSub,
+  live_view: [signing_salt: "dTLRvMlo"],
+  # outer app should be the only one running
+  server: false,
+  # we override the Endpoint set in inner_app's VerifiedRoutes
+  endpoint: OuterAppWeb.Endpoint
+
 # Configures the endpoint
 config :outer_app, OuterAppWeb.Endpoint,
   url: [host: "localhost"],
